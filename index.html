@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <title>Notification Demo</title>
     <script type="text/javascript">
+        navigator.serviceWorker.register('sw.js');
+        
         if ("Notification" in window) {
             let ask = Notification.requestPermission();
             ask.then(permission => {
                 if (permission === "granted") {
                     let msg = new Notification("Web Notification", {
                         body: "Hi there this is the notification description. Click Here!",
-                        icon: "tick.png"
+                        icon: "tick.png",
+                        vibrate: [200, 100, 200, 100, 200, 100, 200],
+                        tag: 'vibration-sample'
                     });
 
                     msg.addEventListener("click", event => {
