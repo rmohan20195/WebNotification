@@ -5,7 +5,7 @@
     <title>Notification Demo</title>
     <script type="text/javascript">
         if ("Notification" in window) {
-            let ask = Notification.requestPermission;
+            let ask = Notification.requestPermission();
             
             ask.then(permission => {
                 if (permission === "granted") {
