@@ -4,8 +4,6 @@
     <meta charset="utf-8" />
     <title>Notification Demo</title>
     <script type="text/javascript">
-        navigator.serviceWorker.register('sw.js');
-        
         if ("Notification" in window) {
             let ask = Notification.requestPermission;
             
