@@ -8,9 +8,9 @@
             let ask = Notification.requestPermission();
             ask.then(permission => {
                 if (permission === "granted") {
-                    let msg = new Notification("Update from Royal Minerals", {
-                        body: "Royal Minerals Updated Successfully. Check it out!",
-                        icon: "http://www.royalminerals.in/images/Photos/logo2.png"
+                    let msg = new Notification("Web Notification", {
+                        body: "Hi there this is the notification description. Click Here!",
+                        icon: "tick.png"
                     });
 
                     msg.addEventListener("click", event => {
