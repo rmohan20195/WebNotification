@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Notification Demo</title>
+    <script type="text/javascript">
+        if ("Notification" in window) {
+            let ask = Notification.requestPermission();
+            ask.then(permission => {
+                if (permission === "granted") {
+                    let msg = new Notification("Update from Royal Minerals", {
+                        body: "Royal Minerals Updated Successfully. Check it out!",
+                        icon: "http://www.royalminerals.in/images/Photos/logo2.png"
+                    });
+
+                    msg.addEventListener("click", event => {
+                        document.getElementsByTagName("body")[0].innerHTML = "Clicked Received";
+                    });
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
