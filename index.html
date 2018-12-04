@@ -5,13 +5,15 @@
     <title>Notification Demo</title>
     <script type="text/javascript">
         if ("Notification" in window) {
-            let ask = Notification.requestPermission();
+            var isEdge = !!window.StyleMedia;
 
-            navigator.serviceWorker.register('sw.js');
-            
-            ask.then(permission => {
-                if (permission === "granted") {
-                    navigator.serviceWorker.ready.then(function (registration) {
+            if (!(isEdge)) {
+                navigator.serviceWorker.register('sw.js');
+            }
+
+            Notification.requestPermission(function (result) {
+                if (result === 'granted') {
+                    if (isEdge) {
                         let msg = new Notification("Web Notification", {
                             body: "Hi there this is the notification description. Click Here!",
                             icon: "tick.png"
@@ -19,9 +21,17 @@
                         msg.addEventListener("click", event => {
                             document.getElementsByTagName("body")[0].innerHTML = "Clicked Received";
                         });    
-                    });
+                    }
+                    else {
+                        navigator.serviceWorker.ready.then(function (registration) {
+                            registration.showNotification('Web Notification', {
+                                body: "Hi there this is the notification description. Click Here!",
+                                icon: "tick.png"
+                            });
+                        });
+                    }
                 }
-            })
+            });
         }
     </script>
 </head>
