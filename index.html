@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,18 +6,19 @@
     <script type="text/javascript">
         if ("Notification" in window) {
             let ask = Notification.requestPermission();
+
+            navigator.serviceWorker.register('sw.js');
             
             ask.then(permission => {
                 if (permission === "granted") {
-                    let msg = new Notification("Web Notification", {
-                        body: "Hi there this is the notification description. Click Here!",
-                        icon: "tick.png",
-                        vibrate: [200, 100, 200, 100, 200, 100, 200],
-                        tag: 'vibration-sample'
-                    });
-
-                    msg.addEventListener("click", event => {
-                        document.getElementsByTagName("body")[0].innerHTML = "Clicked Received";
+                    navigator.serviceWorker.ready.then(function (registration) {
+                        let msg = new Notification("Web Notification", {
+                            body: "Hi there this is the notification description. Click Here!",
+                            icon: "tick.png"
+                        });
+                        msg.addEventListener("click", event => {
+                            document.getElementsByTagName("body")[0].innerHTML = "Clicked Received";
+                        });    
                     });
                 }
             })
